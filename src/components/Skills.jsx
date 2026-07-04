@@ -17,7 +17,7 @@ export default function Skills() {
         >
           <p className="eyebrow mb-3">// skills.config</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-white">
-            Backend <span className="grad">stack</span>
+            Tools and <span className="grad">Frameworks</span>
           </h2>
           <p className="text-white/35 text-sm mt-3 max-w-md">
             The tools I reach for when building server-side systems and APIs.
