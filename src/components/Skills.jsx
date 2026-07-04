@@ -59,7 +59,7 @@ export default function Skills() {
         >
           <p className="font-mono text-xs text-white/25 mb-4 tracking-wider uppercase">Core Focus</p>
           <div className="flex flex-wrap gap-3 items-center">
-            {['Node.js', 'Express.js', 'MySQL', 'REST API', 'JWT Auth', 'Postman'].map((t, i) => (
+          {['Node.js', 'Express.js', 'REST API', 'JWT Auth', 'Socket.IO', 'Postman', 'Git'].map((t, i) => (
               <div key={t} className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-accent/60" style={{ background: 'rgba(0,255,136,0.6)' }} />
                 <span className="font-mono text-sm text-white/60">{t}</span>

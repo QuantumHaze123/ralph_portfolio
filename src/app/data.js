@@ -18,11 +18,10 @@ I'm currently sharpening my skills in Node.js, Express, and database design, and
 
 export const skills = [
   { category: 'Runtime & Frameworks', items: ['Node.js', 'Express.js', 'PHP', 'Laravel'] },
-  { category: 'Databases', items: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis'] },
-  { category: 'API & Protocols', items: ['REST API', 'JSON', 'WebSocket', 'MQTT'] },
-  { category: 'Auth & Security', items: ['JWT', 'OAuth2', 'bcrypt', 'CORS', 'Helmet.js'] },
-  { category: 'Tools & DevOps', items: ['Git', 'Postman', 'Docker', 'Linux', 'Nginx'] },
-  { category: 'Testing & Docs', items: ['Jest', 'Supertest', 'Swagger/OpenAPI', 'Insomnia'] },
+  { category: 'Databases', items: ['MySQL', 'MongoDB', 'Redis'] },
+  { category: 'API & Protocols', items: ['REST API', 'JSON', 'WebSocket'] },
+  { category: 'Auth & Security', items: ['JWT', 'OAuth2', 'bcrypt', 'CORS'] },
+  { category: 'Tools & DevOps', items: ['Git', 'Postman', 'Railway', 'Render', 'Vercel'] },
 ]
 
 export const projects = [

@@ -10,6 +10,7 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle')
+  const [feedback, setFeedback] = useState('')
 
   const validate = () => {
     const e = {}
@@ -23,13 +24,40 @@ export default function Contact() {
   const submit = async (e) => {
     e.preventDefault()
     const errs = validate()
-    if (Object.keys(errs).length) { setErrors(errs); return }
+    if (Object.keys(errs).length) {
+      setErrors(errs)
+      setFeedback('')
+      return
+    }
+
     setErrors({})
+    setFeedback('')
     setStatus('sending')
-    await new Promise(r => setTimeout(r, 1600))
-    setStatus('success')
-    setForm({ name: '', email: '', message: '' })
-    setTimeout(() => setStatus('idle'), 5000)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to send message right now.')
+      }
+
+      setStatus('success')
+      setForm({ name: '', email: '', message: '' })
+      setTimeout(() => setStatus('idle'), 5000)
+    } catch (error) {
+      setStatus('error')
+      setFeedback(error.message || 'Unable to send message right now.')
+      setTimeout(() => {
+        setStatus('idle')
+        setFeedback('')
+      }, 7000)
+    }
   }
 
   const inputClass = (name) =>
@@ -124,6 +152,20 @@ export default function Contact() {
                   <p className="font-mono text-sm text-white/60 mb-1">// 200 OK</p>
                   <p className="text-white font-semibold mb-2">Message sent!</p>
                   <p className="text-white/35 text-xs font-mono">I'll reply within 24 hours.</p>
+                </motion.div>
+              ) : status === 'error' ? (
+                <motion.div
+                  key="error"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center py-12 text-center"
+                >
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center mb-4 border border-red-500/25" style={{ background: 'rgba(239,68,68,0.08)' }}>
+                    <Mail size={24} className="text-red-400" />
+                  </div>
+                  <p className="font-mono text-sm text-white/60 mb-1">// failed</p>
+                  <p className="text-white font-semibold mb-2">Your message could not be sent</p>
+                  <p className="text-white/35 text-xs font-mono max-w-sm">{feedback || 'Please try again in a moment or email me directly.'}</p>
                 </motion.div>
               ) : (
                 <motion.form key="form" onSubmit={submit} className="space-y-4">
